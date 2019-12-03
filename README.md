@@ -29,7 +29,7 @@ modprobe drbd
 drbdadm create-md r0
 drbdadm up r0
 #only on one side run 
-drbdadm -- --overwrite-data-of-peer primary r0/0
+drbdadm primary test_drive --force
 #monitoring sync 
 watch cat /proc/drbd
 ```
