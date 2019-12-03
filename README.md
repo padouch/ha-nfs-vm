@@ -45,8 +45,8 @@ drbdadm down r0
 ```
 ## Configuring corosync
 
-1. add corosync config on both node
-2. generate key 
+1. add corosync config on both node (see examples in this repo)
+2. generate key at primary node
 ``` bash
 sudo corosync-keygen
 ```
@@ -59,14 +59,18 @@ sudo chmod 400 /etc/corosync/authkey
 4. enable corosync
 ``` bash
 sudo mkdir -p /etc/corosync/service.d
-sudo vim /etc/corosync/service.d/pcmk
+```
+
+/etc/corosync/service.d/pcmk
+```
 # add 
 service {
   name: pacemaker
   ver: 1
 }
-vi /etc/default/corosync
-# add 
+```
+/etc/default/corosync
+```# add 
 START=yes
 
 systemctl restart corosync
