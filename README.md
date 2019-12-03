@@ -21,7 +21,8 @@ net.ipv4.tcp_wmem = 4096 87380 33554432
 vm.dirty_ratio = 10
 vm.dirty_background_ratio = 4
 ```
-3. edit configuration of DRDB in /etc/drdb.conf
+3. edit configuration of DRDB in /etc/drdb.conf and /etc/drbd.d/*.res (see examples in this repo)
+
 4. create drdb device
 ``` bash
 modprobe drbd
