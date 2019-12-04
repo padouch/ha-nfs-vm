@@ -21,14 +21,15 @@ net.ipv4.tcp_wmem = 4096 87380 33554432
 vm.dirty_ratio = 10
 vm.dirty_background_ratio = 4
 ```
-3. edit configuration of DRDB in /etc/drdb.conf
+3. edit configuration of DRDB in /etc/drdb.conf and /etc/drbd.d/*.res (see examples in this repo)
+
 4. create drdb device
 ``` bash
 modprobe drbd
 drbdadm create-md r0
 drbdadm up r0
 #only on one side run 
-drbdadm -- --overwrite-data-of-peer primary r0/0
+drbdadm primary test_drive --force
 #monitoring sync 
 watch cat /proc/drbd
 ```
@@ -44,8 +45,8 @@ drbdadm down r0
 ```
 ## Configuring corosync
 
-1. add corosync config on both node
-2. generate key 
+1. add corosync config on both node (see examples in this repo)
+2. generate key at primary node
 ``` bash
 sudo corosync-keygen
 ```
@@ -58,14 +59,18 @@ sudo chmod 400 /etc/corosync/authkey
 4. enable corosync
 ``` bash
 sudo mkdir -p /etc/corosync/service.d
-sudo vim /etc/corosync/service.d/pcmk
+```
+
+/etc/corosync/service.d/pcmk
+```
 # add 
 service {
   name: pacemaker
   ver: 1
 }
-vi /etc/default/corosync
-# add 
+```
+/etc/default/corosync
+```# add 
 START=yes
 
 systemctl restart corosync
