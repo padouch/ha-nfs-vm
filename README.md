@@ -92,7 +92,7 @@ systemctl start pacemaker
 ```
 3. check status
 ``` bash
-systemctl start pacemaker
+systemctl status pacemaker
 ```
 4. add pacemaker configuration
 ``` bash
